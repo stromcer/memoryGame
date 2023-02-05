@@ -1,5 +1,47 @@
-import { emojiFoods } from './emoji-foods.js';
+//import { emojiFoods } from './emoji-foods.js';
+import { allGameCards } from './utils/allCards.js';
 import { shuffleArray } from './utils/shuffleArray.js';
+import { createBoardObject } from './utils/createBoardObject.js';
+import { generateBoard } from './utils/generateBoard.js';
+
+import { BOARD_HTML, GAME_FINISH, GAME_SCORE, GAME_TIMER } from './utils/consts.js';
+
+
+window.onload = function() {
+    startGame()
+    function startGame(){
+        let cardList = Object.keys(allGameCards);
+        let shuffledCardList = shuffleArray(cardList,allGameCards);
+        let boardObject = createBoardObject(shuffledCardList);
+        let htmlBoard = generateBoard(boardObject);
+
+         BOARD_HTML.innerHTML= htmlBoard
+    }
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // INDICACIONES:
 /**
@@ -38,3 +80,4 @@ import { shuffleArray } from './utils/shuffleArray.js';
  * https://twitter.com/intent/tweet?url=https%3A%2F%2Fnaviscode.gumroad.com%2Fl%2Ffrontend-fastlane-plan&text=Completado%20el%20proyecto%20del%20curso%20del%20DOM%20del%20Frontend%20Fastlane%20Plan%20de%20%40NavisCode%0A%0A%F0%9F%9A%80%20A%20por%20el%20siguiente%20reto%21%0A%0A
  *
  */
+

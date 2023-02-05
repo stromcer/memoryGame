@@ -1,0 +1,34 @@
+export let allGameCards = {
+    kiwi:{
+        image:"&#129373;",
+        value:"kiwi",
+    },
+    banana:{
+        image:"&#127820;",
+        value:"banana"
+    },
+    pineapple:{
+        image:"&#127821;",
+        value:"pineapple"
+    },
+    watermelon:{
+        image:"&#127817;",
+        value:"watermelon"
+    },
+    lemon:{
+        image:"&#127819;",
+        value:"lemon"
+    },
+    cherry:{
+        image:"&#127826;",
+        value:"cherry"
+    },
+    grapes:{
+        image:"&#127815;",
+        value:"grapes"
+    },
+    pear:{
+        image:"&#127824;",
+        value:"pear"
+    }
+}
