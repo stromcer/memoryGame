@@ -6,3 +6,44 @@
 .backcontainer{
     width:700px;
 }
+
+.gameCard > div{
+    display:none;
+}
+
+.gameCard{
+    background-color: blue;
+    /* transform: scale(0.97) rotateY(180deg);
+    transition: transform .2s; */
+}
+.gameCard:hover{
+    background-color: rgb(19, 19, 255);
+}
+
+.gameCard_ACTIVE{
+    background-color: silver;
+}
+
+.gameCard:active{
+    background-color: silver;
+}
+.gameCard:active > div{
+    display: unset;
+}
+
+/* .gameCard_ACTIVE:active{
+    
+    transform: scale(0.97) rotateY(180deg);
+    transition: transform .2s;
+} */
+
+.gameCard_ACTIVE > div{
+    display: unset;
+    
+}
+
+.h1{
+    text-shadow: 0 0 9px black;
+}
+
+  /* transform: rotateY(180deg); */

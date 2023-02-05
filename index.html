@@ -16,7 +16,7 @@
     <main>
         <section class="d-flex flex-row m-5 justify-content-center">
             <div class="justify-content-around p-2 rounded score-container bg-primary bg-opacity-50 d-flex flex-row backcontainer">
-                <button class=" btn btn-secondary start-btn">Empezar el juego</button>
+                <button id="start-btn" class=" btn btn-secondary ">Empezar el juego</button>
                 
                 <div class="score-board__item d-flex flex-row mx-3 ">
                     <p class="mx-2 my-auto">Puntos</p>
@@ -31,7 +31,7 @@
         </section>
         <section class="d-flex flex-row m-5 justify-content-center d-flex">
             <div class="justify-content-center px-2 py-5 rounded bg-primary bg-opacity-50 d-flex backcontainer">
-                <div id="board" class=" col-4 bg-secondary border border-dark"></div>
+                <div id="board" class=" col-4 bg-success border border-dark"></div>
 
                 <div id="finish-display" class="text-center d-none">
                     <p>&#9996;</p>
@@ -40,6 +40,10 @@
             </div>
         </section>
     </main>
+
+
+
+
     <template id="template-card">
         <div class="card">
             <div class="card__front">
