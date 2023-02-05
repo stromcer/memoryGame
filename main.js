@@ -3,28 +3,35 @@ import { allGameCards } from './utils/allCards.js';
 import { shuffleArray } from './utils/shuffleArray.js';
 import { createBoardObject } from './utils/createBoardObject.js';
 import { generateBoard } from './utils/generateBoard.js';
-import { BOARD_HTML, GAME_FINISH, GAME_SCORE, GAME_TIMER, ENGINE_CARDS,ENGINE_VARS } from './utils/consts.js';
+import { BOARD_HTML, GAME_FINISH, GAME_SCORE, GAME_TIMER,ENGINE_VARS } from './utils/consts.js';
 
 
 
 // FUNCIONES DEL RELOJ
 function timer(){
-    GAME_TIMER.innerHTML++
+    if(ENGINE_VARS.incrementTimer){
+        GAME_TIMER.innerHTML++
+    }
 }
 function timerReset(){
     GAME_TIMER.innerHTML = 0;
-}
-
-function timerStart(){
-    ENGINE_VARS.incrementTimer = setInterval(timer, 1000)
+    ENGINE_VARS.incrementTimer = true;
 }
 
 function timerStop(){
-    clearInterval(ENGINE_VARS.incrementTimer);
+    ENGINE_VARS.incrementTimer = false;
 }
 
 
 //FUNCIONES PARA EL JUEGO
+
+function checkIfLast(buttonID){
+    let classStr = document.getElementById(buttonID).className
+    return classStr.includes("gameCard_ACTIVE")
+}
+
+
+
 function refreshData(){
     ENGINE_VARS.activeCard1 = "";
     ENGINE_VARS.activeCard2 = "";
@@ -38,7 +45,8 @@ function checkIfEndGame(){
     if(ENGINE_VARS.totalSuccess==8){
         timerStop()
         BOARD_HTML.className="col-4 bg-success border border-dark d-none"
-        GAME_FINISH.className="finish-display"
+        GAME_FINISH.className="finish-display text-center"
+        document.getElementById("endScore").innerHTML = `Tu puntuacion final: ${GAME_SCORE.innerHTML}`
     }
 }
 
@@ -91,14 +99,23 @@ function triggerCard(buttonID){
 
 
 window.onload = function() {
-    startGame()
+    setInterval(timer, 1000);
+    startGame();
     // Listener global de botones
     document.addEventListener("click", function(event){
-        if(event.target.id == "start-btn"){
-            startGame()
-        }
-        else{
-            if(this.getElementById(event.target.id).tagName == "BUTTON")
+        
+        if(document.getElementById(event.target.id).tagName == "BUTTON"){
+
+            if(event.target.id == "start-btn"){
+                startGame()
+                return
+            }
+
+            if(checkIfLast(event.target.id)){
+                console.log("nope")
+                return
+            }
+
             triggerCard(event.target.id)
         }
     });
@@ -110,7 +127,6 @@ window.onload = function() {
         GAME_FINISH.className="text-center d-none"
         ENGINE_VARS.totalSuccess=0;
         timerReset();
-        timerStart();
         GAME_SCORE.innerHTML = 0;
         refreshData();
         let cardList = Object.keys(allGameCards);
