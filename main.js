@@ -3,7 +3,7 @@ import { allGameCards } from './utils/allCards.js';
 import { shuffleArray } from './utils/shuffleArray.js';
 import { createBoardObject } from './utils/createBoardObject.js';
 import { generateBoard } from './utils/generateBoard.js';
-import { BOARD_HTML, GAME_FINISH, GAME_SCORE, GAME_TIMER,ENGINE_VARS } from './utils/consts.js';
+import { BOARD_HTML, GAME_FINISH, GAME_SCORE, GAME_TIMER, ENGINE_VARS, GAME_SHARE } from './utils/consts.js';
 
 
 
@@ -14,7 +14,7 @@ function timer(){
     }
 }
 function timerReset(){
-    GAME_TIMER.innerHTML = 0;
+    GAME_TIMER.innerHTML= 0,
     ENGINE_VARS.incrementTimer = true;
 }
 
@@ -24,6 +24,22 @@ function timerStop(){
 
 
 //FUNCIONES PARA EL JUEGO
+
+function setCardsDefault(card1,card2){
+    
+    document.getElementById(card1).className = "rounded border border-dark w-75 h-75 gameCard";
+    document.getElementById(card2).className = "rounded border border-dark w-75 h-75 gameCard";
+    ENGINE_VARS.stopCards = false;
+    refreshData();
+}
+
+function createShareLink(){
+    let link = `https://twitter.com/intent/tweet?url=https%3A%2F%2FCristian_Mola.com&text=`
+    let str = `¡He obtenido ${GAME_SCORE.innerHTML} puntos en el increible juego de memoria de Dani!`
+    let formattedStr = str.split(" ").join("%20")
+    console.log(formattedStr)
+    GAME_SHARE.href = `${link}${formattedStr}`
+}
 
 function checkIfLast(buttonID){
     let classStr = document.getElementById(buttonID).className
@@ -41,12 +57,12 @@ function refreshData(){
 }
 
 function checkIfEndGame(){
-    console.log(ENGINE_VARS.totalSuccess)
     if(ENGINE_VARS.totalSuccess==8){
-        timerStop()
+        timerStop();
         BOARD_HTML.className="col-4 bg-success border border-dark d-none"
         GAME_FINISH.className="finish-display text-center"
         document.getElementById("endScore").innerHTML = `Tu puntuacion final: ${GAME_SCORE.innerHTML}`
+        createShareLink();
     }
 }
 
@@ -67,28 +83,25 @@ function compareTwo(buttonID,cardValue){
         return
     }
     GAME_SCORE.innerHTML--
-
-    let classList = document.getElementById(buttonID).className.split(" ")
-    classList.pop()
-    classList.push("gameCard")
-    let newClass = classList.join(" ")
-    console.log("newClass")
-    document.getElementById(ENGINE_VARS.lastID).className = newClass;
-    document.getElementById(buttonID).className = newClass;
-    refreshData();
+    ENGINE_VARS.stopCards = true;
+    setTimeout(()=>{setCardsDefault(ENGINE_VARS.lastID,buttonID)},500);
+    
+    
 }
+
+
 
 
 
 function triggerCard(buttonID){
     let classList = document.getElementById(buttonID).className.split(" "); 
-    classList.pop()
-    classList.push("gameCard_ACTIVE")
-    let arrClass = classList.join(" ")
-    let boardCoords = [buttonID.split("_")[1],buttonID.split("_")[2]]
-    let cardValue = ENGINE_VARS.board_obj[boardCoords[0]][boardCoords[1]].value
+    classList.pop();
+    classList.push("gameCard_ACTIVE");
+    let arrClass = classList.join(" ");
+    let boardCoords = [buttonID.split("_")[1],buttonID.split("_")[2]];
+    let cardValue = ENGINE_VARS.board_obj[boardCoords[0]][boardCoords[1]].value;
     document.getElementById(buttonID).className = arrClass;
-    compareTwo(buttonID,cardValue)
+    compareTwo(buttonID,cardValue);
 
 }
 
@@ -110,22 +123,25 @@ window.onload = function() {
                 startGame()
                 return
             }
-
-            if(checkIfLast(event.target.id)){
-                console.log("nope")
+            if(ENGINE_VARS.stopCards){
                 return
             }
 
-            triggerCard(event.target.id)
+            if(checkIfLast(event.target.id)){
+                return
+            }
+
+            triggerCard(event.target.id);
         }
     });
 
 
 
     function startGame(){
-        BOARD_HTML.className="col-4 bg-success border border-dark"
-        GAME_FINISH.className="text-center d-none"
-        ENGINE_VARS.totalSuccess=0;
+        ENGINE_VARS.stopCards = false;
+        BOARD_HTML.className= "col-4";
+        GAME_FINISH.className= "text-center d-none";
+        ENGINE_VARS.totalSuccess= 0;
         timerReset();
         GAME_SCORE.innerHTML = 0;
         refreshData();
@@ -134,7 +150,7 @@ window.onload = function() {
         ENGINE_VARS.board_obj = createBoardObject(shuffledCardList);
         let htmlBoard = generateBoard(ENGINE_VARS.board_obj);
 
-        BOARD_HTML.innerHTML= htmlBoard
+        BOARD_HTML.innerHTML= htmlBoard ;
     }
 
 

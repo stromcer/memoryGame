@@ -1,10 +1,20 @@
+@import url('https://fonts.googleapis.com/css2?family=Unbounded&display=swap');
+
+
 #board{
+    -webkit-box-shadow: inset 12px 13px 2px -7px #153A19; 
+    box-shadow: inset 12px 13px 2px -7px #153A19;
     width: 600px;
     height:600px;
+    background-color:#266A2E;
+    border: 10px inset #6e4d21;
 }
 
 .backcontainer{
     width:700px;
+}
+#gamesection{
+    height: 700px;
 }
 
 .gameCard > div{
@@ -12,38 +22,45 @@
 }
 
 .gameCard{
-    background-color: blue;
-    /* transform: scale(0.97) rotateY(180deg);
-    transition: transform .2s; */
+    background: silver url("./utils/card.png ") no-repeat local 50% 50%;
+    background-size:100% 100%;
+    background-color: silver;
+    -webkit-box-shadow: -9px 10px 13px -6px #153A19; 
+    box-shadow: -9px 10px 13px -6px #153A19;
+    transform:  rotateY(180deg);
+    transition: transform .5s;
 }
+
 .gameCard:hover{
-    background-color: rgb(19, 19, 255);
+    -webkit-box-shadow: -16px 13px 13px -6px #153A19; 
+    box-shadow: -16px 13px 13px -6px #153A19;
+    transform:  rotateY(180deg) scale(1.1);
+    transition: transform .2s;
 }
 
 .gameCard_ACTIVE{
+    -webkit-box-shadow: 9px 10px 13px -6px #153A19; 
+    box-shadow: 9px 10px 13px -6px #153A19;
     background-color: silver;
-}
-
-.gameCard:active{
-    background-color: silver;
-}
-.gameCard:active > div{
-    display: unset;
-}
-
-/* .gameCard_ACTIVE:active{
-    
-    transform: scale(0.97) rotateY(180deg);
+    transform:  rotateY(0deg);
     transition: transform .2s;
-} */
-
-.gameCard_ACTIVE > div{
-    display: unset;
-    
 }
+#gameSection, #scoreSection{
+    background-color:#593E1A ;
+}
+
 
 .h1{
-    text-shadow: 0 0 9px black;
+    text-shadow: 2px 2px 0 #000000, 2px -2px 0 #000000, -2px 2px 0 #000000, -2px -2px 0 #000000, 2px 0px 0 #000000, 0px 2px 0 #000000, -2px 0px 0 #000000, 0px -2px 0 #000000, 2px 2px 2px rgba(0,0,0,0);
+}
+
+#scoreSection{
+    font-family: 'Unbounded';
+    color:#79BEDB;
 }
 
   /* transform: rotateY(180deg); */
+
+#start-btn{
+    background-color:  #8d3232;
+}

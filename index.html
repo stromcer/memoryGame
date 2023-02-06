@@ -15,8 +15,8 @@
 <body class="bg-dark">
     <main>
         <section class="d-flex flex-row m-5 justify-content-center">
-            <div class="justify-content-around p-2 rounded score-container bg-primary bg-opacity-50 d-flex flex-row backcontainer">
-                <button id="start-btn" class=" btn btn-secondary ">Empezar el juego</button>
+            <div id="scoreSection" class="justify-content-around p-2 rounded score-container d-flex flex-row backcontainer">
+                <button id="start-btn" class=" btn ">Empezar el juego</button>
                 
                 <div class="score-board__item d-flex flex-row mx-3 ">
                     <p class="mx-2 my-auto">Puntos</p>
@@ -30,13 +30,14 @@
             </div>
         </section>
         <section class="d-flex flex-row m-5 justify-content-center d-flex">
-            <div class="justify-content-center px-2 py-5 rounded bg-primary bg-opacity-50 d-flex backcontainer">
-                <div id="board" class=" col-4 bg-success border border-dark"></div>
+            <div id="gameSection" class="justify-content-center px-2 py-5 rounded d-flex backcontainer">
+                <div id="board" class=" col-4 "></div>
 
                 <div id="finish-display" class="text-center d-none">
                     <p>&#9996;</p>
                     <h2>Has terminado el juego!</h2>
                     <div id="endScore"></div>
+                    <a id="compartir" target="_blank" href="">Compartir en twitter</a>
                 </div>
             </div>
         </section>
@@ -45,14 +46,14 @@
 
 
 
-    <template id="template-card">
+    <!-- <template id="template-card">
         <div class="card">
             <div class="card__front">
             </div>
             <div class="card__back">
             </div>
         </div>
-    </template>
+    </template> -->
 
 </body>
 
