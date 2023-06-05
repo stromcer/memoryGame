@@ -10,14 +10,7 @@ npm install --global serve
 serve
 ```
 
-## Remaining:
-
+3. Para jugar dirigete a :
 ```
-Make card animation
-```
-
-## Knowns bugs to fix:
-
-```
-- Card reveal on click but can be cancelled
+http://localhost:3000 
 ```
